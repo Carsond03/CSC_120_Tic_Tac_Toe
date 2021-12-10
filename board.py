@@ -2,7 +2,6 @@ import sqlite3
 connection = sqlite3.connect("my.db")
 cursor = connection.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS game(winner text)''')
-
 connection.commit()
 connection.close()
 board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
