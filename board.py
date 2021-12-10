@@ -1,3 +1,10 @@
+import sqlite3
+connection = sqlite3.connect("my.db")
+cursor = connection.cursor()
+cursor.execute('''CREATE TABLE IF NOT EXISTS game(winner text)''')
+
+connection.commit()
+connection.close()
 board = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
 def print_board():
     print(board[0])
@@ -13,39 +20,40 @@ def check_win():
     for r in range(0, 3, 1):
         if board[r][0] == "X" and board[r][1] == "X" and board[r][2] == "X":
             print("Player 1, is the winner")
+            cursor.execute("insert into game values('player 1')")
             return True
     for r in range(0, 3, 1):
         if board[r][0] == "O" and board[r][1] == "O" and board[r][2] == "O":
             print("Player 2, is the winner")
+            cursor.execute("insert into game values('player 2')")
             return True
     for c in range(0, 3, 1):
         if board[0][c] == "X" and board[1][c] == "X" and board[2][c] == "X":
             print("player 1, is the winner")
+            cursor.execute("insert into game values('player 1')")
             return True
     for c in range(0, 3, 1):
         if board[0][c] == "O" and board[1][c] == "O" and board[2][c] == "O":
             print("player 2, is the winner")
+            cursor.execute("insert into game values('player 2')")
             return True
     if board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
         print("Player 1, is the winner")
+        cursor.execute("insert into game values('player 1')")
         return True
     if board[0][2] == "X" and board[1][1] == "X" and board[2][0] == "X":
         print("Player 1, is the winner")
+        cursor.execute("insert into game values('player 1')")
         return True
     if board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
         print("Player 2, is the winner")
+        cursor.execute("insert into game values('player 2')")
         return True
     if board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O":
         print("Player 2, is the winner")
+        cursor.execute("insert into game values('player 2')")
         return True
     return False
-
-
-
-
-
-
-
 print_board()
 player = 1
 while True:
@@ -87,4 +95,8 @@ while True:
         player = 1
     if check_win() == True:
         break
+connection.commit()
+connection.close()
+
+
 
